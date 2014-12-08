@@ -23,7 +23,6 @@
     app.controller('TodoFormController', function($scope){
       $scope.formData = {};
       $scope.createTodo = function(){
-        $scope.todos = [];
         $scope.todos.push({text: $scope.formData.text, active: true, createdAt: Date.now()});
         $scope.formData = {};
       }
