@@ -35,7 +35,7 @@
         template: myTemplate,
         link: function(scope, elem, attrs){
           scope.finishTodo = function(todo){
-            todo.done = true;
+            todo.active = false;
           }
         }
       }
