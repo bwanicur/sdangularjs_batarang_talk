@@ -14,10 +14,6 @@
         {text: 'get batarang presentation ready', active: true, createdAt: Date.now()}
       ];
 
-      $scope.activeTodos = function(){
-
-      }
-
     });
 
     app.controller('TodoFormController', function($scope){
@@ -69,7 +65,7 @@
     <div id="todo-list" class="row">
       <div class="col-sm-4 col-sm-offset-4">
 
-        <div class="checkbox" ng-repeat="todo in todos">
+        <div class="checkbox" ng-repeat="todo in todos | slowFilter:todos">
           <div todo-item class="item-active-{{todo.active}}"></div>
         </div>
 
