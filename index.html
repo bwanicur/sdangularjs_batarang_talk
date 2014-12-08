@@ -14,6 +14,12 @@
         {text: 'get batarang presentation ready', active: true, createdAt: Date.now()}
       ];
 
+      $scope.activeTodos = function(){
+        return $scope.todos.filter(function(todo){
+          return todo.active === true;
+        });
+      };
+
     });
 
     app.controller('TodoFormController', function($scope){
@@ -59,7 +65,7 @@
   <div class="container" ng-controller="TodosController">
 
     <div class="jumbotron text-center">
-      <h1>TODOS: <span class="label label-info">{{ todos.length }}</span></h1>
+      <h1>TODOS: <span class="label label-info">{{ activeTodos().length }}</span></h1>
     </div>
 
     <div id="todo-list" class="row">
