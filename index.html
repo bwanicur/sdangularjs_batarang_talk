@@ -1,0 +1,95 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Standard Anuglar Todo App</title>
+  <script src="js/angular.js"></script>
+  <link rel="stylesheet" href="css/bootstrap.css" />
+  <script type="text/javascript">
+
+    var app = angular.module('app', []);
+
+    app.controller('TodosController', function($scope){
+      $scope.todos = [
+        {text: 'learn what batarang is', active: true, createdAt: Date.now()},
+        {text: 'get batarang presentation ready', active: true, createdAt: Date.now()}
+      ];
+
+      $scope.activeTodos = function(){
+
+      }
+
+    });
+
+    app.controller('TodoFormController', function($scope){
+      $scope.formData = {};
+      $scope.createTodo = function(){
+        $scope.todos = [];
+        $scope.todos.push({text: $scope.formData.text, active: true, createdAt: Date.now()});
+        $scope.formData = {};
+      }
+    });
+
+    app.directive('todoItem', function(){
+      var myTemplate = '<label><input type="checkbox" ng-click="finishTodo(todo)">{{ todo.text }}</label>';
+      return {
+        restrcit: 'A',
+        template: myTemplate,
+        link: function(scope, elem, attrs){
+          scope.finishTodo = function(todo){
+            todo.done = true;
+          }
+        }
+      }
+    });
+
+    app.filter('slowFilter', function(){
+      return function(input, todos){
+        for(i = 0; i < (todos.length * 100); i++){
+          console.log('wasting time here');
+        }
+        return input;
+      }
+    });
+
+  </script>
+  <style>
+    .item-active-false {
+      text-decoration: line-through;
+      color: #ddd;
+    }
+  </style>
+</head>
+<body ng-app="app">
+  <!-- view code stolen from: http://scotch.io/tutorials/javascript/creating-a-single-page-todo-app-with-node-and-angular -->
+  <div class="container" ng-controller="TodosController">
+
+    <div class="jumbotron text-center">
+      <h1>TODOS: <span class="label label-info">{{ todos.length }}</span></h1>
+    </div>
+
+    <div id="todo-list" class="row">
+      <div class="col-sm-4 col-sm-offset-4">
+
+        <div class="checkbox" ng-repeat="todo in todos">
+          <div todo-item class="item-active-{{todo.active}}"></div>
+        </div>
+
+      </div>
+    </div>
+
+    <div id="todo-form" class="row" ng-controller="TodoFormController">
+      <div class="col-sm-8 col-sm-offset-2 text-center">
+        <form>
+          <div class="form-group">
+            <input type="text" class="form-control input-lg text-center" placeholder="Type Todo here..." ng-model="formData.text">
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-lg" ng-click="createTodo()">Add</button>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+</body>
+</html>
