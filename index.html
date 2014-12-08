@@ -37,7 +37,13 @@
         template: myTemplate,
         link: function(scope, elem, attrs){
           scope.finishTodo = function(todo){
-            todo.active = false;
+            if(todo.active === false){
+              todo.active = true;
+            }
+            else{
+              todo.active = false;
+            }
+            elem.toggleClass('item-active-false');
           }
         }
       }
@@ -73,7 +79,7 @@
       <div class="col-sm-4 col-sm-offset-4">
 
         <div class="checkbox" ng-repeat="todo in todos">
-          <div todo-item class="item-active-{{todo.active}}"></div>
+          <div todo-item></div>
         </div>
 
       </div>
