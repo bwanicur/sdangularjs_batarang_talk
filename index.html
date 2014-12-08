@@ -65,7 +65,8 @@
   <div class="container" ng-controller="TodosController">
 
     <div class="jumbotron text-center">
-      <h1>TODOS: <span class="label label-info">{{ activeTodos().length }}</span></h1>
+      <h3>TOTAL TODOS: {{ todos.length }}</h3>
+      <h3>COMPLETED TODOS: <span class="label label-info">{{ activeTodos().length }}</span></h3>
     </div>
 
     <div id="todo-list" class="row">
